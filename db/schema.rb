@@ -10,9 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_22_041100) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_23_083541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "content_publishers", force: :cascade do |t|
+    t.text "header"
+    t.text "footer"
+    t.bigint "user_id", null: false
+    t.bigint "embeddable_content_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["embeddable_content_id"], name: "index_content_publishers_on_embeddable_content_id"
+    t.index ["user_id"], name: "index_content_publishers_on_user_id"
+  end
+
+  create_table "content_stylesheets", force: :cascade do |t|
+    t.bigint "embeddable_content_id", null: false
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["embeddable_content_id"], name: "index_content_stylesheets_on_embeddable_content_id"
+    t.index ["user_id"], name: "index_content_stylesheets_on_user_id"
+  end
+
+  create_table "embeddable_contents", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.text "header"
+    t.text "footer"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_embeddable_contents_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -24,8 +57,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_22_041100) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "content_publishers", "embeddable_contents"
+  add_foreign_key "content_publishers", "users"
+  add_foreign_key "content_stylesheets", "embeddable_contents"
+  add_foreign_key "content_stylesheets", "users"
+  add_foreign_key "embeddable_contents", "users"
 end
