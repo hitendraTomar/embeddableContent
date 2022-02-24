@@ -1,0 +1,52 @@
+<% if @content.new_record? %>
+  <% path = contents_path %>
+<% else %>
+  <% path = content_path(@content) %>
+<% end %>
+
+<%= nested_form_for(@content, url: path, html: {:class => "form-horizontal center"}) do |f| %>
+  <div class="card">
+    <div class="card-body">
+
+      <%= f.hidden_field :user_id, value: current_user.id %>
+
+      <div class="form-group mb-3 col-md-4">
+        <%= f.label :title, class: "form-label" %>
+        <div class="">
+          <%= f.text_field :title, { class: "form-control", placeholder: "Title" } %>
+        </div>
+      </div>
+
+      <div class="form-group mb-3 col-md-4">
+        <%= f.label :header, class: "form-label" %>
+        <div class="">
+          <%= f.text_field :header, { class: "form-control", placeholder: "Header" } %>
+        </div>
+      </div>
+
+      <div class="form-group mb-3 col-md-4">
+        <%= f.label :body, class: "form-label" %>
+        <div class="">
+          <%= f.text_area :body, { class: "form-control", placeholder: "Body" } %>
+        </div>
+      </div>
+
+      <div class="form-group mb-3 col-md-4">
+        <%= f.label :footer, class: "form-label" %>
+        <div class="">
+          <%= f.text_field :footer, { class: "form-control", placeholder: "Footer" } %>
+        </div>
+      </div>
+
+      <h3>Stylsheets</h3>
+      <%= f.fields_for :content_stylesheets, html: {:class => "form-horizontal center"} do |cs| %>
+        <%= render 'content_stylesheets', cs: cs %>
+      <% end %>
+
+      <%= f.link_to_add "Add a Content Stylsheets", :content_stylesheets, class: "btn btn-primary" %>
+      <%= f.submit 'submit', class: "btn btn-primary" %>
+
+    </div>
+  </div>
+<% end %>
+

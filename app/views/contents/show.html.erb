@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-10">
+    <h2>Show Content</h2>
+  </div>
+  <div class="col-md-2">
+    <%= link_to "Back", contents_path, class: "btn btn-primary"%>
+  </div>
+  <hr>
+</div>
+
+<b>Title:</b><%= @content.title %><br>
+<b>Header:</b><%= @content.header %><br>
+<b>Body:</b><%= @content.body %><br>
+<b>Footer:</b><%= @content.footer %><br>
+
+<% if @stylesheets.present? %>
+  <h2> Stylesheets </h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Body</th>
+      </tr>
+    </thead>
+
+    <tbody class="table-striped">
+      <% @stylesheets.each do |stylesheet| %>
+        <tr>
+          <td><%= stylesheet.name %></td>
+          <td><%= stylesheet.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
