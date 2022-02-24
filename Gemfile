@@ -53,6 +53,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails', '~> 5.0.0'
   gem 'factory_bot'
+  gem 'byebug'
 end
 
 group :development do
@@ -75,3 +76,11 @@ end
 
 gem 'devise'
 gem 'bootstrap', '~> 5.1.3'
+
+gem "nested_form"
+gem 'twitter-bootstrap-rails'
+
+gem 'cancancan'
+gem 'jquery-rails'
+
+gem 'kaminari'

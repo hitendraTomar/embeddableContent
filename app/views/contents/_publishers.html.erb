@@ -1,0 +1,23 @@
+<h2> Publishers </h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @content_publishers.each do |content_publisher| %>
+        <tr>
+          <td scope="row"><%= content_publisher.user&.name %></td>
+          <td><%= content_publisher.user&.email %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination justify-content-center">
+  <%= paginate @content_publishers %>
+</div>

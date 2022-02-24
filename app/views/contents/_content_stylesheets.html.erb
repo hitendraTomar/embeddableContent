@@ -1,0 +1,25 @@
+<% if cs.object.user_id == current_user.id || !cs.object.user_id %>
+  <%= cs.hidden_field :user_id, value: current_user.id %>
+
+  <div class="form-group mb-3">
+    <div class="row">
+      <%= cs.label "Name", class: 'control-label col-lg-2' %>
+      <div class="col-lg-8">
+        <%= cs.text_field :name, class: 'form-control', autofocus: true %>
+      </div>
+      <p class="error-message"><%= cs.errors_for(:name) %></p>
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <div class="row">
+      <%= cs.label "Body", class: 'control-label col-lg-2' %>
+      <div class="col-lg-8">
+        <%= cs.text_area :body, class: 'form-control', autofocus: true %>
+        <p class="error-message"><%= cs.errors_for(:body) %></p>
+      </div>
+    </div>
+  </div>
+
+  <%= cs.link_to_remove "Remove stylesheet", class: "btn btn-primary mb-3" %>
+<% end %>

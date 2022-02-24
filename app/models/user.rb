@@ -5,4 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates_uniqueness_of :name, :case_sensitive => false
+
+
+  def publisher?
+    self.class.name == "Publisher"
+  end
+
+  def creator?
+    self.class.name == "Creator"
+  end
 end

@@ -1,0 +1,74 @@
+<% if @content.new_record? %>
+  <% path = contents_path %>
+<% else %>
+  <% path = content_path(@content) %>
+<% end %>
+
+<%= nested_form_for(@content, url: path, html: {:class => "form-horizontal center"}, data: { turbo: false }) do |f| %>
+
+  <div class="card container">
+    <div class="card-body">
+      <%= f.hidden_field :user_id, value: current_user.id %>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Title", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_field :title, class: 'form-control', autofocus: true, disabled: current_user.publisher? %>
+            <p class="error-message mt-2"><%= f.errors_for(:title) %></p>
+          </div>
+        </div>
+      </div>
+      <% if current_user.creator? %>
+        <div class="form-group mb-3">
+          <div class="row">
+            <%= f.label "Header", class: 'control-label col-lg-2' %>
+            <div class="col-lg-8">
+              <%= f.text_area :header, class: 'form-control', autofocus: true %>
+
+              <p class="error-message"><%= f.errors_for(:header) %></p>
+          </div>
+        </div>
+      <% end %>
+      <div class="form-group mb-3">
+        <div class="row">
+
+          <%= f.label "Body", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_area :body, class: 'form-control', autofocus: true, disabled: current_user.publisher?  %>
+            <p class="error-message"><%= f.errors_for(:body) %></p>
+          </div>
+        </div>
+      </div>
+      <% if current_user.creator? %>
+        <div class="form-group mb-3">
+          <div class="row">
+            <%= f.label "Footer", class: 'control-label col-lg-2' %>
+            <div class="col-lg-8">
+              <%= f.text_area :footer, class: 'form-control', autofocus: true %>
+
+              <p class="error-message"><%= f.errors_for(:footer) %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%count = 0%>
+      <%= f.fields_for :content_publishers, html: {:class => "form-horizontal center"} do |cp| %>
+        <% if count == 0 %>
+          <%count = 1%>
+          <%= render 'content_publishers', cp: cp, f: f %>
+        <% end %>
+      <% end %>
+      <h3>Stylesheets</h3>
+
+      <%= f.fields_for :content_stylesheets, html: {:class => "form-horizontal center"} do |cs| %>
+        <%= render 'content_stylesheets', cs: cs, f: f %>
+      <% end %>
+
+      <%= f.link_to_add "Add Stylesheet", :content_stylesheets, class: "btn btn-primary" %>
+      <%= f.submit 'submit', class: "btn btn-primary" %>
+
+    </div>
+  </div>
+<% end %>
+

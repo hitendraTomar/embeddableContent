@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-10">
+    <h1>Contents</h1>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Body</th>
+        <th scope="col" colspan="4">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contents.each do |content| %>
+        <tr>
+          <td scope="row"><%= content.title %></td>
+          <td><%= content.body %></td>
+          <td><%= link_to "Show", content_path(content), class: "btn btn-sm btn-primary" %></td>
+          <td><%= link_to "Edit", edit_content_path(content), class: "btn btn-sm btn-primary" if current_user %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination justify-content-center">
+  <%= paginate @contents %>
+</div>
+

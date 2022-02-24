@@ -38,3 +38,62 @@ tr:nth-child(even) {
   float: right;
   padding-right: 15px;
 }
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.hide {
+  display: none;
+}
+
+.hidden {
+  visibility: none;
+}
+
+hr:not([size]) {
+  height: 1px;
+}
+
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.btn.btn-primary {
+  background-color: #427acd;
+}
+
+.ml-1 {
+  margin-left: 85% !important;
+}
+
+.has-signup-error{
+    .signup-error{
+      background: transparent;
+      color: red;
+      border: none;
+    }
+
+    input, select{
+      background-color: red;
+      border-color: red;
+      color: gray;
+      font-weight: 500;
+    }
+
+    &.checkbox{
+      label{
+        &:before{
+          background-color: red;
+          border-color: red;
+        }
+      }
+    }
+}
+
+.error-message {
+  color: red;
+}

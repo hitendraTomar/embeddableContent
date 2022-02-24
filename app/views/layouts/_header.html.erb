@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-light nav-bar container-fluid">
+  <a class="navbar-brand" href="/contents">Content</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link hover-underline-animation" href="/contents">Home <span class="sr-only"></span></a>
+      </li>
+      <% if current_user.present? %>
+        <% if current_user.publisher? %>
+          <li class="nav-item">
+            <%= link_to "My Publications", my_publications_content_publishers_path, class: "nav-link hover-underline-animation"%>
+          </li>
+        <% end %>
+        <li class="nav-item active">
+          <%= link_to "logout", destroy_user_session_path, method: :delete, class: "nav-link hover-underline-animation"%>
+        </li>
+        <li><%= current_user.class.name %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

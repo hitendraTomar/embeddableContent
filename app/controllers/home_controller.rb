@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     if @current_publisher
       redirect_to publisher_dashboard_home_path and return
     else
-      redirect_to publisher_dashboard_home_path and return
+      redirect_to contents_path and return
     end
   end
 end
