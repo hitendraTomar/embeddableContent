@@ -10,8 +10,13 @@
         <a class="nav-link hover-underline-animation" href="/contents">Home <span class="sr-only"></span></a>
       </li>
       <% if current_user.present? %>
+        <% if current_user.publisher? %>
+          <li class="nav-item">
+            <%= link_to "My Publications", destroy_user_session_path, method: :delete, class: "nav-link hover-underline-animation"%>
+          </li>
+        <% end %>
         <li class="nav-item active">
-          <%= link_to "logout", destroy_user_session_path, class: "nav-link hover-underline-animation"%>
+          <%= link_to "logout", destroy_user_session_path, method: :delete, class: "nav-link hover-underline-animation"%>
         </li>
         <li><%= current_user.class.name %></li>
       <% end %>

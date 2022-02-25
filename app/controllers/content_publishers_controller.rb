@@ -5,4 +5,6 @@ class ContentPublishersController < ApplicationController
     redirect_to contents_path
   end
 
+  def my_publications
+  end
 end
