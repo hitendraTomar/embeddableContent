@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-md-10">
+    <h2>Edit Content Publisher</h2>
+  </div>
+  <div class="col-md-2 mt-2">
+    <%= link_to "Back", content_path(@content_publisher.content), class: "btn btn-sm btn-primary"%>
+  </div>
+  <hr>
+</div>
+
+
+<%= nested_form_for(@content_publisher, url: content_publishers_path(@content_publisher), html: {:class => "form-horizontal center"}) do |f| %>
+
+  <% if @content_publisher.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@content_publisher.errors.count, "error") %> prohibited this candidate from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @content_publisher.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card container">
+    <div class="card-body">
+      <%= f.hidden_field :user_id, value: current_user.id %>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Title", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_field :title, class: 'form-control', autofocus: true, value: f.object.content&.title, disabled: true %>
+
+            <%= f.errors_for(:title) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Body", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_area :body, class: 'form-control', autofocus: true, value: f.object.content&.body, disabled: true %>
+            <%= f.errors_for(:body) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Header", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_field :header, class: 'form-control', autofocus: true %>
+            <%= f.errors_for(:header) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Footer", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_field :footer, class: 'form-control', autofocus: true %>
+            <%= f.errors_for(:footer) %>
+          </div>
+        </div>
+      </div>
+
+      <%= f.submit 'submit', class: "btn btn-primary" %>
+
+    </div>
+  </div>
+<% end %>

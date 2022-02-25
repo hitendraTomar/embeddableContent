@@ -5,45 +5,57 @@
 <% end %>
 
 <%= nested_form_for(@content, url: path, html: {:class => "form-horizontal center"}) do |f| %>
-  <div class="card">
-    <div class="card-body">
 
+  <% if @content.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@content.errors.count, "error") %> prohibited this candidate from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @content.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card container">
+    <div class="card-body">
       <%= f.hidden_field :user_id, value: current_user.id %>
 
-      <div class="form-group mb-3 col-md-4">
-        <%= f.label :title, class: "form-label" %>
-        <div class="">
-          <%= f.text_field :title, { class: "form-control", placeholder: "Title" } %>
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Title", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_field :title, class: 'form-control', autofocus: true, disabled: true %>
+
+            <%= f.errors_for(:title) %>
+          </div>
         </div>
       </div>
 
-      <div class="form-group mb-3 col-md-4">
-        <%= f.label :header, class: "form-label" %>
-        <div class="">
-          <%= f.text_field :header, { class: "form-control", placeholder: "Header" } %>
+      <div class="form-group mb-3">
+        <div class="row">
+          <%= f.label "Body", class: 'control-label col-lg-2' %>
+          <div class="col-lg-8">
+            <%= f.text_area :body, class: 'form-control', autofocus: true, disabled: true  %>
+            <%= f.errors_for(:body) %>
+          </div>
         </div>
       </div>
 
-      <div class="form-group mb-3 col-md-4">
-        <%= f.label :body, class: "form-label" %>
-        <div class="">
-          <%= f.text_area :body, { class: "form-control", placeholder: "Body" } %>
-        </div>
-      </div>
-
-      <div class="form-group mb-3 col-md-4">
-        <%= f.label :footer, class: "form-label" %>
-        <div class="">
-          <%= f.text_field :footer, { class: "form-control", placeholder: "Footer" } %>
-        </div>
-      </div>
-
-      <h3>Stylsheets</h3>
-      <%= f.fields_for :content_stylesheets, html: {:class => "form-horizontal center"} do |cs| %>
-        <%= render 'content_stylesheets', cs: cs %>
+      <%= f.fields_for :content_publishers, html: {:class => "form-horizontal center"} do |cp| %>
+        <%= render 'content_publishers', cp: cp, f: f %>
       <% end %>
 
-      <%= f.link_to_add "Add a Content Stylsheets", :content_stylesheets, class: "btn btn-primary" %>
+      <%= f.fields_for :content_stylesheets, html: {:class => "form-horizontal center"} do |cs| %>
+        <h3>Stylsheets</h3>
+        <%= render 'content_stylesheets', cs: cs, f: f %>
+      <% end %>
+
+      <%= link_to "Add a Content Stylsheets", add_stylesheet_path(f.object), class: "btn btn-primary" unless f.object.new_record? %>
       <%= f.submit 'submit', class: "btn btn-primary" %>
 
     </div>

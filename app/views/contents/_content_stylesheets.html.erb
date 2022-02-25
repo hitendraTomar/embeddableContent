@@ -1,15 +1,23 @@
-<div class="form-group mb-3 col-md-4">
-  <%= cs.label :name, class: "form-label" %>
-  <div class="">
-    <%= cs.text_field :name, { class: "form-control", placeholder: "Name" } %>
+<%= cs.hidden_field :user_id, value: current_user.id %>
+
+<div class="form-group mb-3">
+  <div class="row">
+    <%= cs.label "Name", class: 'control-label col-lg-2' %>
+    <div class="col-lg-8">
+      <%= cs.text_field :name, class: 'form-control', autofocus: true %>
+    </div>
+    <%= cs.errors_for(:name) %>
   </div>
 </div>
 
-<div class="form-group mb-3 col-md-4">
-  <%= cs.label :body, class: "form-label" %>
-  <div class="">
-    <%= cs.text_area :body, { class: "form-control", placeholder: "Body" } %>
+<div class="form-group mb-3">
+  <div class="row">
+    <%= cs.label "Body", class: 'control-label col-lg-2' %>
+    <div class="col-lg-8">
+      <%= cs.text_area :body, class: 'form-control', autofocus: true %>
+      <%= cs.errors_for(:body) %>
+    </div>
   </div>
 </div>
 
-<%= cs.link_to_remove "Remove this Content Stylesheet", class: "btn btn-primary" %>
+<%= link_to "Remove this Content", remove_stylesheet_path(f.object, cs.object), class: "btn btn-primary mb-3" unless cs.object.new_record?%>
