@@ -3,6 +3,7 @@ class ContentPublishersController < ApplicationController
   load_and_authorize_resource class: ContentPublisher
 
   def add_publisher
+    authenticate_user!
     ContentPublisher.find_or_create_by!(user_id: current_user.id, embeddable_content_id: params[:content_id])
     redirect_to my_publications_content_publishers_path
   end

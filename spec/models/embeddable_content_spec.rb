@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe EmbeddableContent, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe 'associations' do
+    it { should have_many(:content_publishers) }
+    it { should have_many(:publishers) }
+    it { should have_many(:content_stylesheets) }
+    it { should belong_to(:creator).class_name('User') }
+  end
+
 end

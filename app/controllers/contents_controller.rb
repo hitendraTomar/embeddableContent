@@ -33,7 +33,7 @@ class ContentsController < ApplicationController
   def show
     authenticate_user! unless @current_publisher
     if params[:path] && @current_publisher
-      @content = @current_publisher.contents.find_by('lower(title) = ?', params[:path].gsub('-', ' '))
+      @content = @current_publisher.contents.find_by('lower(title) = ?', params[:path].gsub('-', ' ').downcase)
       (redirect_to my_publications_content_publishers_path, error: 'Invalid URL') and return unless @content
     end
     @stylesheets = @content.content_stylesheets.by_user((@current_publisher || current_user).id).page(params[:page]).per(2)
