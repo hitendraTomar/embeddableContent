@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   resources :contents do
      get 'page/:page', action: :index, on: :collection
   end
+
   resources :content_stylesheets
-  resources :content_publishers
+  resources :content_publishers do
+    get :my_publications, on: :collection
+  end
   get "/add_publisher/:content_id", to: "content_publishers#add_publisher", as: :add_publisher
-  get "/:id/add_stylesheet", to: "contents#add_stylesheet", as: :add_stylesheet
-  get "/:id/remove_stylesheet/:stylesheet_id", to: "contents#remove_stylesheet", as: :remove_stylesheet
+
 end

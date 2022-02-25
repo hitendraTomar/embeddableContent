@@ -12,7 +12,7 @@
       <% if current_user.present? %>
         <% if current_user.publisher? %>
           <li class="nav-item">
-            <%= link_to "My Publications", destroy_user_session_path, method: :delete, class: "nav-link hover-underline-animation"%>
+            <%= link_to "My Publications", my_publications_content_publishers_path, class: "nav-link hover-underline-animation"%>
           </li>
         <% end %>
         <li class="nav-item active">

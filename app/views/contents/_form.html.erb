@@ -68,8 +68,12 @@
           </div>
         </div>
       <% end %>
+      <%count = 0%>
       <%= f.fields_for :content_publishers, html: {:class => "form-horizontal center"} do |cp| %>
-        <%= render 'content_publishers', cp: cp, f: f %>
+        <% if count == 0 %>
+          <%count = 1%>
+          <%= render 'content_publishers', cp: cp, f: f %>
+        <% end %>
       <% end %>
       <h3>Stylesheets</h3>
 
