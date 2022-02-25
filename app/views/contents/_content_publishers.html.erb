@@ -5,7 +5,7 @@
     <%= cp.label "Header", class: 'control-label col-lg-2' %>
     <div class="col-lg-8">
       <%= cp.text_area :header, class: 'form-control', autofocus: true %>
-      <%= cp.errors_for(:header) %>
+      <p class="error-message"><%= cp.errors_for(:header) %></p>
     </div>
   </div>
 </div>
@@ -15,7 +15,7 @@
     <%= cp.label "Footer", class: 'control-label col-lg-2' %>
     <div class="col-lg-8">
       <%= cp.text_area :footer, class: 'form-control', autofocus: true %>
-      <%= cp.errors_for(:footer) %>
+      <p class="error-message"><%= cp.errors_for(:footer) %></p>
     </div>
   </div>
 </div>
