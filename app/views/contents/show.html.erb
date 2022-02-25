@@ -9,9 +9,9 @@
 </div>
 
 <b>Title:</b><%= @content.title %><br>
-<b>Header:</b><%= @content.header %><br>
+<b>Header:</b><%= header(@content) %><br>
 <b>Body:</b><%= @content.body %><br>
-<b>Footer:</b><%= @content.footer %><br>
+<b>Footer:</b><%= footer(@content) %><br>
 
 <% if @content_publishers.present? %>
   <%= render "publishers" %>
