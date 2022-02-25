@@ -37,6 +37,7 @@ class ContentsController < ApplicationController
       (redirect_to my_publications_content_publishers_path, error: 'Invalid URL') and return unless @content
     end
     @stylesheets = @content.content_stylesheets.by_user((@current_publisher || current_user).id).page(params[:page]).per(2)
+    @styles = @stylesheets.map(&:body).join
     @content_publishers = @content.content_publishers.page(params[:page]).per(2)
   end
 

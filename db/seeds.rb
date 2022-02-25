@@ -3,7 +3,7 @@ publisher = Publisher.create!(name: 'Test Publisher', email: 'testpublisher@yopm
 creator = Creator.create!(name: 'Test Creator', email: 'testcreator@yopmail.com', password: 'password', password_confirmation: 'password')
 
 content = EmbeddableContent.find_or_create_by(title: 'My first book',header: "That's a header by creator", body: 'creator is creative and impressive', footer: "That's a footer by creator", user_id: creator.id)
-content.content_stylesheets.find_or_create_by(name: "color", body: "color: blue", user_id: creator.id)
+content.content_stylesheets.find_or_create_by(name: "color", body: "color: blue;", user_id: creator.id)
 
 content = EmbeddableContent.find_or_create_by(title: 'My second book',header: "That's a header by creator", body: 'creator is very creative and impressive', footer: "That's a footer by creator", user_id: creator.id)
 content.content_stylesheets.find_or_create_by(name: "color", body: "color: black;", user_id: creator.id)

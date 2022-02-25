@@ -7,12 +7,24 @@
   </div>
   <hr>
 </div>
-
-<b>Title:</b><%= @content.title %><br>
-<b>Header:</b><%= header(@content) %><br>
-<b>Body:</b><%= @content.body %><br>
-<b>Footer:</b><%= footer(@content) %><br>
+<div class='content-style'>
+  <b>Title:</b><%= @content.title %><br>
+  <b>Header:</b><%= header(@content) %><br>
+  <b>Body:</b><%= @content.body %><br>
+  <b>Footer:</b><%= footer(@content) %><br>
+</div>
 
 <% if @content_publishers.present? && !@current_publisher%>
   <%= render "publishers" %>
 <% end %>
+
+<script type="text/javascript">
+    var result = {},
+      attributes = JSON.parse('<%= @styles.split(';'); %>'.replace(/&quot;/g, '\"'))
+
+    for (var i = 0; i < attributes.length; i++) {
+        var entry = attributes[i].split(':');
+        result[entry.splice(0,1)[0]] = entry.join(':');
+    }
+    const note = document.querySelector('.content-style').style.cssText += "<%= @styles %>"
+</script>
