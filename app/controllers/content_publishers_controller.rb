@@ -1,4 +1,6 @@
 class ContentPublishersController < ApplicationController
+  before_action :authenticate_user!, except: :my_publications
+  load_and_authorize_resource class: ContentPublisher
 
   def add_publisher
     ContentPublisher.find_or_create_by!(user_id: current_user.id, embeddable_content_id: params[:content_id])
@@ -6,6 +8,7 @@ class ContentPublishersController < ApplicationController
   end
 
   def my_publications
+    authenticate_user! unless @current_publisher
     @contents = EmbeddableContent.joins(:content_publishers).where(content_publishers: { user_id: (@current_publisher || current_user).id }).page(params[:page]).per(2)
   end
 end
