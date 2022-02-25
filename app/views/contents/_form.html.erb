@@ -9,7 +9,7 @@
   <% if @content.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@content.errors.count, "error") %> prohibited this candidate from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
@@ -49,13 +49,13 @@
       <%= f.fields_for :content_publishers, html: {:class => "form-horizontal center"} do |cp| %>
         <%= render 'content_publishers', cp: cp, f: f %>
       <% end %>
+      <h3>Stylesheets</h3>
 
       <%= f.fields_for :content_stylesheets, html: {:class => "form-horizontal center"} do |cs| %>
-        <h3>Stylsheets</h3>
         <%= render 'content_stylesheets', cs: cs, f: f %>
       <% end %>
 
-      <%= link_to "Add a Content Stylsheets", add_stylesheet_path(f.object), class: "btn btn-primary" unless f.object.new_record? %>
+      <%= f.link_to_add "Add Stylesheet", :content_stylesheets, class: "btn btn-primary" %>
       <%= f.submit 'submit', class: "btn btn-primary" %>
 
     </div>

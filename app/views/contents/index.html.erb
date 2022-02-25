@@ -40,7 +40,9 @@
             </td>
           <% end %>
           <td>
-            <%= link_to "Add Content Publisher", add_publisher_path(content), class: "btn btn-sm btn-primary"  unless content.content_publishers.any? %>
+            <% if @current_user.publisher? %>
+              <%= link_to "Add to my Publication", add_publisher_path(content), class: "btn btn-sm btn-primary" %>
+            <% end %>
           </td>
         </tr>
         <% end %>
