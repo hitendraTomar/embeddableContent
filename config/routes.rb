@@ -7,11 +7,16 @@ Rails.application.routes.draw do
   end
 
   resources :contents do
-     get 'page/:page', action: :index, on: :collection
+    collection do
+      get 'page/:page', action: :index
+    end
   end
 
   resources :content_stylesheets
   resources :content_publishers do
+    collection do
+      get :my_impressions, as: :my_impressions
+    end
     get :my_publications, on: :collection
   end
   get "/add_publisher/:content_id", to: "content_publishers#add_publisher", as: :add_publisher

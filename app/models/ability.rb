@@ -4,10 +4,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    byebug
     if user.is_a? Publisher
       can [:index, :show, :edit, :update], EmbeddableContent
     elsif user.is_a? Creator
       can :manage, EmbeddableContent, user_id: user.id
+      can :manage, ContentPublisher, :content => { user_id: user.id }
     end
     can :show, EmbeddableContent
   end

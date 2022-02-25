@@ -1,6 +1,8 @@
+require 'redis_backend'
 class ContentsController < ApplicationController
   before_action :authenticate_user!, except: :show
   load_and_authorize_resource class: EmbeddableContent
+  before_action :update_impression, only: :show
 
   def index
     @contents = @contents.page(params[:page]).per(10)
@@ -48,6 +50,16 @@ class ContentsController < ApplicationController
     redirect_to contents_path
   end
 
+  def my_impressions
+    redis = RedisBackend.new
+    @content_publishers = []
+    @contents.each do |content|
+      content.content_publishers.each do |content_publisher|
+        @content_publishers << content_publisher
+      end
+    end
+  end
+
   private
 
   def content_params
@@ -55,5 +67,12 @@ class ContentsController < ApplicationController
       content_stylesheets_attributes: [:id, :name, :body, :user_id, :_destroy],
       content_publishers_attributes: [:id, :header, :footer, :user_id]
       )
+  end
+
+  def update_impression
+    redis = RedisBackend.new
+    content_publisher = @content.content_publishers.find_by_user_id(current_user.id)
+    impression_count = "content_#{@content.id}_publisher_#{content_publisher.id}_impression_count"
+    redis[impression_count] = redis[impression_count].to_i + 1
   end
 end

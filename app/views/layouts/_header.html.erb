@@ -6,19 +6,20 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link hover-underline-animation" href="/contents">Home <span class="sr-only"></span></a>
-      </li>
+      <% if (@current_publisher || current_user)&.publisher? %>
+        <li class="nav-item">
+          <%= link_to "My Publications", my_publications_content_publishers_path, class: "nav-link hover-underline-animation"%>
+        </li>
+      <% end %>
+      <% if current_user&.creator? %>
+        <li class="nav-item">
+          <%= link_to "Impressions", my_impressions_content_publishers_path, class: "nav-link hover-underline-animation"%>
+        </li>
+      <% end %>
       <% if current_user.present? %>
-        <% if current_user.publisher? %>
-          <li class="nav-item">
-            <%= link_to "My Publications", my_publications_content_publishers_path, class: "nav-link hover-underline-animation"%>
-          </li>
-        <% end %>
         <li class="nav-item active">
           <%= link_to "logout", destroy_user_session_path, method: :delete, class: "nav-link hover-underline-animation"%>
         </li>
-        <li><%= current_user.class.name %></li>
       <% end %>
     </ul>
   </div>
