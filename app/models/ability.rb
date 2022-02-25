@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     if user.is_a? Publisher
-      can [:index, :show, :edit, :update, :link], EmbeddableContent
+      can [:index, :show, :edit, :update], EmbeddableContent
     else
       can :manage, EmbeddableContent, user_id: user.id
     end

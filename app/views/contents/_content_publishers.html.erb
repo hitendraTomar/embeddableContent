@@ -1,8 +1,10 @@
+<% cp.hidden_field :user_id, value: current_user.id %>
+
 <div class="form-group mb-3">
   <div class="row">
     <%= cp.label "Header", class: 'control-label col-lg-2' %>
     <div class="col-lg-8">
-      <%= cp.text_field :header, class: 'form-control', autofocus: true %>
+      <%= cp.text_area :header, class: 'form-control', autofocus: true %>
       <%= cp.errors_for(:header) %>
     </div>
   </div>
@@ -12,7 +14,7 @@
   <div class="row">
     <%= cp.label "Footer", class: 'control-label col-lg-2' %>
     <div class="col-lg-8">
-      <%= cp.text_field :footer, class: 'form-control', autofocus: true %>
+      <%= cp.text_area :footer, class: 'form-control', autofocus: true %>
       <%= cp.errors_for(:footer) %>
     </div>
   </div>

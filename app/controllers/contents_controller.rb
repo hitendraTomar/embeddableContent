@@ -17,10 +17,13 @@ class ContentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @content_publisher = @content.content_publishers.build unless @content.content_publishers.any?
+
+  end
 
   def update
-    if @content.update(content_params)
+    if @content.update!(content_params)
       flash[:success] = "Content Successfully Updated"
       redirect_to contents_path
     else
