@@ -6,6 +6,6 @@ class ContentPublishersController < ApplicationController
   end
 
   def my_publications
-    @contents = EmbeddableContent.joins(:content_publishers).where(content_publishers: { user_id: current_user.id }).page(params[:page]).per(2)
+    @contents = EmbeddableContent.joins(:content_publishers).where(content_publishers: { user_id: (@current_publisher || current_user).id }).page(params[:page]).per(2)
   end
 end

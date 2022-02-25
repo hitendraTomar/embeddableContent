@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   end
   get "/add_publisher/:content_id", to: "content_publishers#add_publisher", as: :add_publisher
 
+  match "*path" => "contents#show", via: :get
 end

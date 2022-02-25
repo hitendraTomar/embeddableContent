@@ -13,6 +13,6 @@
 <b>Body:</b><%= @content.body %><br>
 <b>Footer:</b><%= footer(@content) %><br>
 
-<% if @content_publishers.present? %>
+<% if @content_publishers.present? && !@current_publisher%>
   <%= render "publishers" %>
 <% end %>

@@ -28,7 +28,7 @@
           <td><%= content.header %></td>
           <td><%= content.footer %></td>
           <td><%= link_to "Show", content_path(content), class: "btn btn-sm btn-primary" %></td>
-          <% unless @current_user.publisher? %>
+          <% unless current_user.publisher? %>
             <td><%= link_to "Edit", edit_content_path(content), class: "btn btn-sm btn-primary" %></td>
             <td>
               <%= link_to "Destroy", content_path(content),

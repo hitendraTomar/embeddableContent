@@ -19,17 +19,7 @@
           <td scope="row"><%= content.title %></td>
           <td><%= content.body %></td>
           <td><%= link_to "Show", content_path(content), class: "btn btn-sm btn-primary" %></td>
-          <td><%= link_to "Edit", edit_content_path(content), class: "btn btn-sm btn-primary" %></td>
-          <% unless @current_user.publisher? %>
-            <td>
-              <%= link_to "Destroy", content_path(content),
-                class: "btn btn-sm btn-primary",
-                data: {
-                  turbo_method: :delete,
-                  turbo_confirm: "Are you sure?"
-                } %>
-            </td>
-          <% end %>
+          <td><%= link_to "Edit", edit_content_path(content), class: "btn btn-sm btn-primary" if current_user %></td>
         </tr>
         <% end %>
     </tbody>

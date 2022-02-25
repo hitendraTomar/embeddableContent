@@ -19,6 +19,8 @@ module Content
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.hosts << "test-publisher.localhost.com"
+
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
      "<div class='your class'>#{html_tag}</div>".html_safe
     }
