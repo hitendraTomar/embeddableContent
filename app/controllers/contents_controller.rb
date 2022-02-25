@@ -36,7 +36,6 @@ class ContentsController < ApplicationController
   end
 
   def update
-    byebug
     if @content.update(content_params)
       flash[:success] = "Content Successfully Updated"
       redirect_to contents_path
@@ -78,8 +77,8 @@ class ContentsController < ApplicationController
   private
 
   def content_params
-    params.require(:embeddable_content).permit(:user_id,
-      content_stylesheets_attributes: [:id, :name,:body, :user_id, :_destroy],
+    params.require(:embeddable_content).permit(:user_id, :header, :body, :title, :footer,
+      content_stylesheets_attributes: [:id, :name, :body, :user_id, :_destroy],
       content_publishers_attributes: [:id, :header, :footer, :user_id]
       )
   end
