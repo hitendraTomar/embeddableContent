@@ -18,4 +18,8 @@ class EmbeddableContent < ApplicationRecord
     allow_destroy: true
 
   validates_presence_of :title
+
+  def user
+    EmbeddableContent.find_by_id(user_id)
+  end
 end

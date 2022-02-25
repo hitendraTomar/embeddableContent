@@ -7,14 +7,16 @@ Rails.application.routes.draw do
   end
 
   resources :contents do
-     get 'page/:page', action: :index, on: :collection
+    get 'page/:page', action: :index, on: :collection
   end
 
   resources :content_stylesheets
+
   resources :content_publishers do
+    get :my_impressions, as: :my_impressions, on: :collection
     get :my_publications, on: :collection
   end
-  get "/add_publisher/:content_id", to: "content_publishers#add_publisher", as: :add_publisher
 
+  get "/add_publisher/:content_id", to: "content_publishers#add_publisher", as: :add_publisher
   match "*path" => "contents#show", via: :get
 end

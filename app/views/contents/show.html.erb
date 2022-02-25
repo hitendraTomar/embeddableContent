@@ -1,17 +1,9 @@
-<div class="row">
-  <div class="col-md-10">
-    <h2>Show Content</h2>
-  </div>
-  <div class="col-md-2 mt-2">
-    <%= link_to "Back", contents_path, class: "btn btn-sm btn-primary"%>
-  </div>
-  <hr>
-</div>
+<h3> <%= @content.title %> </h3>
+
 <div class='content-style'>
-  <b>Title:</b><%= @content.title %><br>
-  <b>Header:</b><%= header(@content) %><br>
-  <b>Body:</b><%= @content.body %><br>
-  <b>Footer:</b><%= footer(@content) %><br>
+  <p class="border border-info rounded ml-3 mr-3 pl-1 header"><%= header(@content) %></p>
+  <p class="border border-info rounded ml-3 mr-3 pl-1 body"><%= @content.body %></p>
+  <p class="border border-info rounded ml-3 mr-3 pl-1 pt footer"><%= footer(@content) %></p>
 </div>
 
 <% if @content_publishers.present? && !@current_publisher%>

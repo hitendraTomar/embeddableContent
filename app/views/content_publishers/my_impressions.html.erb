@@ -1,0 +1,26 @@
+<% redis = RedisBackend.new %>
+
+<h2> Impressions </h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Publisher</th>
+        <th scope="col">Content</th>
+        <th scope="col">Impression Count</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @content_publishers.each do |content_publisher| %>
+        <tr>
+          <% impression_count = "content_#{content_publisher.content&.id}_publisher_#{content_publisher.id}_impression_count" %>
+          <td scope="row"><%= content_publisher.user&.name %></td>
+          <td><%= content_publisher.content&.title %></td>
+          <td><%= redis[impression_count].presence || 0 %></td>
+          <td><%= link_to "Show", content_path(content_publisher.content), class: "btn btn-sm btn-primary" %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>

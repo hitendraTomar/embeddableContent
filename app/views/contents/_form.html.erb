@@ -19,7 +19,8 @@
           </div>
         </div>
       </div>
-      <% if current_user.creator? %>
+
+      <% if current_user&.creator? %>
         <div class="form-group mb-3">
           <div class="row">
             <%= f.label "Header", class: 'control-label col-lg-2' %>
@@ -40,7 +41,8 @@
           </div>
         </div>
       </div>
-      <% if current_user.creator? %>
+
+      <% if current_user&.creator? %>
         <div class="form-group mb-3">
           <div class="row">
             <%= f.label "Footer", class: 'control-label col-lg-2' %>
@@ -52,13 +54,16 @@
           </div>
         </div>
       <% end %>
+
       <%count = 0%>
+
       <%= f.fields_for :content_publishers, html: {:class => "form-horizontal center"} do |cp| %>
         <% if count == 0 %>
           <%count = 1%>
           <%= render 'content_publishers', cp: cp, f: f %>
         <% end %>
       <% end %>
+
       <h3>Stylesheets</h3>
 
       <%= f.fields_for :content_stylesheets, html: {:class => "form-horizontal center"} do |cs| %>
